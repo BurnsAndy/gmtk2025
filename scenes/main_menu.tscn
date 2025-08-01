@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc5a2txvcsmjt"]
+
+[ext_resource type="Script" uid="uid://d1m8ni62yfxlc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_8ln24"]
+[ext_resource type="Resource" uid="uid://dijfrcxjhmln4" path="res://levels/level_1-1.tres" id="3_rtw2f"]
+[ext_resource type="Resource" uid="uid://ck1qp7gcmxs6c" path="res://levels/level_1-2.tres" id="4_oa1go"]
+[ext_resource type="Resource" uid="uid://drbvjcp5nrume" path="res://levels/level_1-3.tres" id="5_tbmy8"]
+[ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="6_rtw2f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
+font_size = 54
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.862745)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_l6cm7")
+all_levels = Array[ExtResource("2_8ln24")]([ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8")])
+
+[node name="MainMenuUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="MainMenuUI"]
+layout_mode = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.270588, 0.239216, 0.290196, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="MainMenuUI"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+text = "<game title>"
+label_settings = SubResource("LabelSettings_vue75")
+horizontal_alignment = 1
+
+[node name="PlayAllLevelsButton" type="Button" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_rtw2f")
+text = "Play All Levels"
+
+[node name="FreeplayModeButton" type="Button" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_rtw2f")
+text = "Freeplay Mode"
+
+[node name="LevelSelectButton" type="Button" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_rtw2f")
+text = "Level Select"

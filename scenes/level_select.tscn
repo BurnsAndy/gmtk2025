@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwwifiiy4fk1l"]
+
+[ext_resource type="Script" uid="uid://diql14twikh1b" path="res://scripts/level_select.gd" id="1_3shnc"]
+
+[node name="LevelSelect" type="Node2D"]
+script = ExtResource("1_3shnc")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 91.0
+offset_bottom = 23.0
+text = "Level Select"
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+offset_left = 25.0
+offset_top = 39.0
+offset_right = 1123.0
+offset_bottom = 649.0

@@ -1,6 +1,5 @@
 [gd_scene load_steps=18 format=3 uid="uid://dharp37746f5j"]
 
-[ext_resource type="Script" uid="uid://xbtey0pylkbt" path="res://scenes/game/puzzle_level_scene.gd" id="1_4x5tx"]
 [ext_resource type="Script" uid="uid://kua02r6f4624" path="res://scripts/classes/ui/puzzle_mode_ui.gd" id="1_w1g6o"]
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_l83v5"]
 [ext_resource type="Script" uid="uid://cc0uc0xkw2lqg" path="res://scripts/classes/puzzle_mode.gd" id="2_p547m"]
@@ -11,6 +10,94 @@
 [ext_resource type="Texture2D" uid="uid://do8ov7ffsws14" path="res://assets/rgb_gradient.tres" id="5_kal5q"]
 [ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/ConfettiEmitter.gd" id="5_p547m"]
 [ext_resource type="LabelSettings" uid="uid://caif6pkqts43m" path="res://assets/LabelSettings_Default.tres" id="7_3yxmj"]
+
+[sub_resource type="GDScript" id="GDScript_kw0w4"]
+script/source = "# scenes/game/puzzle_level_scene.gd
+extends Node
+
+@onready var puzzle_mode = $PuzzleMode
+@onready var puzzle_ui = $PuzzleUI
+@onready var sequencer = $Sequencer
+@onready var confetti_emitter = $ConfettiEmitter
+@export var level_set: Array[PuzzleLevel]
+var current_level: int = -1
+var main_menu_scene_path = \"res://scenes/main_menu.tscn\"
+
+var level_state: PuzzleLevelState = PuzzleLevelState.new()
+signal level_state_request_change
+signal level_state_changed
+
+
+func _ready() -> void:
+	puzzle_mode.pattern_check_failed.connect(sequencer.set_wrong_notes)
+	sequencer.pattern_complete.connect(puzzle_mode.stop_goal_pattern)
+	sequencer.check_requested.connect(_on_check_requested)
+	sequencer.play_goal_requested.connect(puzzle_mode.play_goal_pattern)
+	
+	nextLevel()
+
+func nextLevel():
+	level_state.SetState(PuzzleLevelState.States.LOADING)
+	confetti_emitter.cease_celebration()
+	puzzle_ui.hide_win_or_lose()
+	if current_level < level_set.size() - 1:
+		current_level += 1
+		var level = level_set[current_level]
+		print(level_set)
+		prints(current_level, level.resource_path)
+		puzzle_ui.set_level_name(level.level_name)
+		puzzle_ui.set_level_description(level.description)
+		puzzle_mode.load_level(load(level.resource_path))
+		sequencer.play_state()
+		puzzle_mode.play_goal_pattern()
+		level_state.SetState(PuzzleLevelState.States.PLAY)
+	else:
+		#Probably want this to actually go to a final score screen instead
+		go_to_main_menu()
+		
+func go_to_main_menu():
+	var scene = load(main_menu_scene_path)
+	var instance = scene.instantiate()
+	get_tree().root.add_child(instance)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = instance
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			match event.keycode:
+				KEY_ENTER:
+					if level_state.GetState() == PuzzleLevelState.States.WIN:
+						nextLevel()
+				KEY_ESCAPE:
+					go_to_main_menu()
+
+func _on_check_requested() -> void:
+	puzzle_mode.check_pattern()
+
+func state_request_change(new_state: PuzzleLevelState.States):
+	level_state.SetState(new_state)
+	level_state_changed.emit(new_state)
+	match new_state:
+		PuzzleLevelState.States.WIN:
+			level_win()
+		PuzzleLevelState.States.LOSE:
+			level_lose()
+
+func level_win():
+	confetti_emitter.celebrate()
+	sequencer.win_state()
+	puzzle_ui.show_win_or_lose(true)
+	pass
+
+func level_lose():
+	sequencer.lose_state()
+	puzzle_ui.show_win_or_lose(false)
+	pass
+
+func _on_puzzle_mode_level_state_request_change(new_state: PuzzleLevelState.States) -> void:
+	state_request_change(new_state)
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_nnehw"]
 font_size = 15
@@ -53,8 +140,8 @@ scale_max = 5.0
 scale_curve = SubResource("CurveTexture_l83v5")
 color_initial_ramp = ExtResource("5_kal5q")
 
-[node name="PuzzleLevelTest" type="Node2D"]
-script = ExtResource("1_4x5tx")
+[node name="PuzzleLevel" type="Node2D"]
+script = SubResource("GDScript_kw0w4")
 level_set = Array[ExtResource("2_l83v5")]([ExtResource("3_nnehw"), ExtResource("4_7ihxu"), ExtResource("5_7ihxu")])
 
 [node name="PuzzleMode" type="Node" parent="."]
