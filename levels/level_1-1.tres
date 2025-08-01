@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=2 format=3 uid="uid://dijfrcxjhmln4"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_8g6tw"]
+
+[resource]
+script = ExtResource("1_8g6tw")
+level_name = "Level 1-1"
+description = "Just a steady beat."
+goal_pattern = Array[int]([0, -1, -1, -1, 0, -1, -1, -1, 0, -1, -1, -1, 0, -1, -1, -1])
+bpm = 120
+max_score = 1000
+score_penalty = 100
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

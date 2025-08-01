@@ -1,0 +1,151 @@
+[gd_scene load_steps=18 format=3 uid="uid://dharp37746f5j"]
+
+[ext_resource type="Script" uid="uid://xbtey0pylkbt" path="res://scenes/game/puzzle_level_scene.gd" id="1_4x5tx"]
+[ext_resource type="Script" uid="uid://kua02r6f4624" path="res://scripts/classes/ui/puzzle_mode_ui.gd" id="1_w1g6o"]
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_l83v5"]
+[ext_resource type="Script" uid="uid://cc0uc0xkw2lqg" path="res://scripts/classes/puzzle_mode.gd" id="2_p547m"]
+[ext_resource type="Resource" uid="uid://d03ou5iycuscf" path="res://levels/level_1-1.tres" id="3_nnehw"]
+[ext_resource type="Resource" uid="uid://d03ou5iycuscf" path="res://levels/level_1-2.tres" id="4_7ihxu"]
+[ext_resource type="Script" uid="uid://cnaxqhjw0cjm5" path="res://scripts/classes/Sequencer.gd" id="4_kal5q"]
+[ext_resource type="Resource" uid="uid://drbvjcp5nrume" path="res://levels/level_1-3.tres" id="5_7ihxu"]
+[ext_resource type="Texture2D" uid="uid://do8ov7ffsws14" path="res://assets/rgb_gradient.tres" id="5_kal5q"]
+[ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/ConfettiEmitter.gd" id="5_p547m"]
+[ext_resource type="LabelSettings" uid="uid://caif6pkqts43m" path="res://assets/LabelSettings_Default.tres" id="7_3yxmj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nnehw"]
+font_size = 15
+font_color = Color(0.830335, 0.830335, 0.830335, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kal5q"]
+font_size = 36
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CurveTexture" id="CurveTexture_co8vq"]
+
+[sub_resource type="Curve" id="Curve_kal5q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l83v5"]
+curve = SubResource("Curve_kal5q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kal5q"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 0, 0)
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 199.5
+initial_velocity_max = 200.5
+angular_velocity_min = 99.0
+angular_velocity_max = 101.0
+radial_velocity_min = -180.0
+radial_velocity_max = 180.0
+radial_velocity_curve = SubResource("CurveTexture_co8vq")
+gravity = Vector3(0, 500, 0)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_l83v5")
+color_initial_ramp = ExtResource("5_kal5q")
+
+[node name="PuzzleLevelTest" type="Node2D"]
+script = ExtResource("1_4x5tx")
+level_set = Array[ExtResource("2_l83v5")]([ExtResource("3_nnehw"), ExtResource("4_7ihxu"), ExtResource("5_7ihxu")])
+
+[node name="PuzzleMode" type="Node" parent="."]
+script = ExtResource("2_p547m")
+
+[node name="Sequencer" type="Node2D" parent="."]
+script = ExtResource("4_kal5q")
+
+[node name="PuzzleUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_w1g6o")
+
+[node name="LevelNameLabel" type="Label" parent="PuzzleUI"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 88.0
+offset_bottom = 23.0
+text = "LevelName"
+label_settings = ExtResource("7_3yxmj")
+
+[node name="LevelDescriptionLabel" type="Label" parent="PuzzleUI"]
+offset_left = 1.0
+offset_top = 23.0
+offset_right = 130.0
+offset_bottom = 46.0
+text = "LevelDescription"
+label_settings = SubResource("LabelSettings_nnehw")
+
+[node name="CurrentScoreLabel" type="Label" parent="PuzzleUI"]
+layout_mode = 1
+offset_top = 46.0
+offset_right = 61.0
+offset_bottom = 69.0
+text = "Score: 0"
+label_settings = ExtResource("7_3yxmj")
+
+[node name="TotalScoreLabel" type="Label" parent="PuzzleUI"]
+offset_top = 69.0
+offset_right = 104.0
+offset_bottom = 92.0
+text = "Total Score: 0"
+label_settings = ExtResource("7_3yxmj")
+
+[node name="ControlsLabel" type="Label" parent="PuzzleUI"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 92.0
+offset_right = 257.0
+offset_bottom = 349.0
+text = "Controls
+-------------
+↔ (Move cursor)
+↕ (Change note)
+A (Play goal pattern)
+S  (Check goal pattern)
+Z (Activate note)
+X (Pause/Play)
+C (Stop)
+Enter (Next Level, on Win Screen)"
+label_settings = ExtResource("7_3yxmj")
+
+[node name="WinOrLoseLabel" type="Label" parent="PuzzleUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 427.0
+offset_top = 248.0
+offset_right = 697.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(60.5, 11.5)
+text = "YOU WIN/LOSE!"
+label_settings = SubResource("LabelSettings_kal5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ConfettiEmitter" type="GPUParticles2D" parent="."]
+position = Vector2(564, 151)
+emitting = false
+amount = 500
+lifetime = 2.0
+explosiveness = 0.8
+randomness = 1.0
+fixed_fps = 12
+process_material = SubResource("ParticleProcessMaterial_kal5q")
+script = ExtResource("5_p547m")
+
+[connection signal="level_state_request_change" from="PuzzleMode" to="." method="_on_puzzle_mode_level_state_request_change"]

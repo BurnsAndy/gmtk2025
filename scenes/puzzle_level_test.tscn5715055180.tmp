@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dharp37746f5j"]
+
+[ext_resource type="Script" uid="uid://xbtey0pylkbt" path="res://scenes/game/puzzle_level_scene.gd" id="1_4x5tx"]
+[ext_resource type="Script" uid="uid://kua02r6f4624" path="res://scripts/classes/ui/puzzle_mode_ui.gd" id="1_w1g6o"]
+[ext_resource type="Script" uid="uid://cc0uc0xkw2lqg" path="res://scripts/classes/puzzle_mode.gd" id="2_p547m"]
+[ext_resource type="Script" uid="uid://cnaxqhjw0cjm5" path="res://scripts/classes/Sequencer.gd" id="4_kal5q"]
+
+[node name="PuzzleLevelTest" type="Node2D"]
+script = ExtResource("1_4x5tx")
+
+[node name="PuzzleMode" type="Node" parent="."]
+script = ExtResource("2_p547m")
+
+[node name="Sequencer" type="Node2D" parent="."]
+script = ExtResource("4_kal5q")
+
+[node name="PuzzleUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_w1g6o")
+
+[node name="ScoreLabel" type="Label" parent="PuzzleUI"]
+layout_mode = 1
+offset_right = 1.0
+offset_bottom = 23.0
+
+[node name="PlayGoalButton" type="Button" parent="PuzzleUI"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 31.0
+offset_right = 143.0
+offset_bottom = 62.0
+text = "Play Goal Pattern"
+
+[node name="CheckButton" type="Button" parent="PuzzleUI"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 67.0
+offset_right = 119.0
+offset_bottom = 98.0
+text = "Check Pattern"
+
+[node name="Label" type="Label" parent="PuzzleUI"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 104.0
+offset_right = 164.0
+offset_bottom = 283.0
+text = "Controls
+-------------
+↔ (Move cursor)
+↕ (Change note)
+Space (Activate note)
+P (Pause/Play)
+O (Stop)"
