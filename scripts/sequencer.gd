@@ -8,17 +8,17 @@ const CENTER_Y: int     = 300  # Will be adjusted based on viewport
 
 # Playback variables
 @export var bpm: float              = 120.0
-@export var note_scale: Array[Variant] = [62, 64, 66, 67, 69, 71, 73, 74]  # MIDI note numbers
-@export var note_names: Array[Variant] = ["D", "E", "F#", "G", "A", "B", "C#", "D"] # Musical scale (D major)
-var notes: Array[int] = []
-var steps_per_second: float = (bpm / 60.0) * 4.0  # 16th notes
+var steps_per_second: float = 0
 # Sequencer state
 var playhead_angle: float   = 0.0
-var wrong_notes: Array[bool] = []
 var playing: bool     = true
 var notes_hidden: bool = false
 var last_step: int    = -1
 var controls_locked: bool = true
+#@onready var audio_manager:AudioManager = $AudioManager
+@onready var instr_1_polyphonic_audio_player: AudioStreamPlayer2D = $instr1_PolyphonicAudioPlayer
+@onready var instr_2_polyphonic_audio_player: AudioStreamPlayer2D = $instr2_PolyphonicAudioPlayer
+
 
 signal pattern_complete
 signal check_requested
@@ -62,6 +62,7 @@ func setup_tracks(level: PuzzleLevel):
 		print(level.track_settings[i].goal_pattern.size())
 		tracks[i] = SequencerTrack.new(level.track_settings[i])
 	tracks[0].active = true
+	steps_per_second = (bpm / 60)# * tracks[0].num_steps
 	
 func _ready() -> void:
 	clear_pattern()
@@ -70,89 +71,31 @@ func _ready() -> void:
 	var viewport_size: Rect2 = get_viewport_rect()
 	position = Vector2(viewport_size.size.x/2, viewport_size.size.y/2)
 
-	# Initialize audio
-	setup_audio()
-	add_child(audio_player)
-
-	# Wait for the next frame to ensure audio_player is ready
-	await setup_audio()
-
-	# Wait for the next frame to ensure audio_player is ready
-	await get_tree().process_frame
-
-	audio_playback = audio_player.get_stream_playback()
-	fill_buffer_with_silence()
-
-func setup_audio():
-	audio_generator = AudioStreamGenerator.new()
-	audio_generator.buffer_length = .1 # * 100 = ms
-	audio_generator.mix_rate = SAMPLE_RATE
-	audio_generator.mix_rate_mode = AudioStreamGenerator.MIX_RATE_CUSTOM
-
-	audio_player.stream = audio_generator
-	audio_player.play()
-
-	# Wait for the next frame to ensure audio_player is ready
-	await get_tree().process_frame
-
-	audio_playback = audio_player.get_stream_playback()
-	fill_buffer_with_silence()
-
-
-func fill_buffer_with_silence():
-	# Fill the buffer with zeros (silence) for both channels
-	while audio_playback.can_push_buffer(1):
-		audio_playback.push_buffer(PackedVector2Array([Vector2(0.0, 0.0)]))
-
-
-func midi_to_freq(midi_note: int) -> float:
-	# Convert MIDI note number to frequency
-	return A4_FREQ * pow(2.0, (midi_note - 69.0) / 12.0)
-
-
-func generate_tone(frequency: float, duration: float, volume: float = 0.5):
-	var sample_count: int = int(duration * SAMPLE_RATE)
-	var increment: float  = frequency / SAMPLE_RATE
-	var phase: float      = 0.0
-
-	var attack_time: float   = 0.01
-	var release_time: float  = 0.05
-	var attack_samples: int  = int(attack_time * SAMPLE_RATE)
-	var release_samples: int = int(release_time * SAMPLE_RATE)
-
-	for i in range(sample_count):
-		if audio_playback.can_push_buffer(1):
-			var envelope: float = 1.0
-
-			if i < attack_samples:
-				envelope = float(i) / attack_samples
-			elif i > sample_count - release_samples:
-				envelope = float(sample_count - i) / release_samples
-
-			var sample: float = sin(phase * TAU_FLOAT) * volume * envelope
-			# Same sample for both channels (mono to stereo)
-			audio_playback.push_buffer(PackedVector2Array([Vector2(sample, sample)]))
-
-			phase = fmod(phase + increment, 1.0)
-
-
 func _process(delta):
 	if playing:
 		# Update playhead (changed negative to positive for clockwise rotation)
 		playhead_angle += steps_per_second * tracks[0].angle_per_step * delta
 		playhead_angle = fmod(playhead_angle, 360.0)
-
 		# Check if we hit a new step
 		for i in range(tracks.size()):
 			var current_step: int = int(playhead_angle / tracks[i].angle_per_step)
-			if current_step != tracks[0].last_step:
+			if current_step != tracks[i].last_step:
 				if (current_step == 0 && tracks[i].last_step == tracks[i].num_steps - 1):
 					pattern_complete.emit()
 				if tracks[i].notes[current_step] != -1:
-					play_note(note_scale[tracks[i].notes[current_step]])
+					play_sample(i, tracks[i].notes[current_step])
 				tracks[i].last_step = current_step
-
+		
 	queue_redraw()
+
+func play_sample(track_index:int, note_index:int):
+	prints("playing - track: ", track_index, ", sample: ", note_index)
+	var sample_name = str(track_index) + "_" + str(note_index)
+	match track_index:
+		0:
+			instr_1_polyphonic_audio_player.play_sound_effect_from_library(sample_name)
+		1:
+			instr_2_polyphonic_audio_player.play_sound_effect_from_library(sample_name)
 
 
 func draw_wrong_note_indicator(pos):
@@ -234,15 +177,16 @@ func cursor_move(steps:int):
 			else:
 				tracks[i].cursor_step = (tracks[i].cursor_step - 1 +  tracks[i].num_steps) % tracks[i].num_steps
 
+
 func change_note_pitch(steps:int):
 	for i in range(tracks.size()):
 		if tracks[i].active:
 			if(steps > 0):
-				if(tracks[i].notes[tracks[i].cursor_step] != -1):
-					tracks[i].notes[tracks[i].cursor_step] = min(tracks[i].notes[tracks[i].cursor_step] + steps, note_scale.size() - 1)
+				tracks[i].notes[tracks[i].cursor_step] = min(tracks[i].notes[tracks[i].cursor_step] + steps, NOTE_COLORS.size() - 1)
 			else:
-				tracks[i].notes[tracks[i].cursor_step] = max(tracks[i].notes[tracks[i].cursor_step] - steps, 0)
-				
+				tracks[i].notes[tracks[i].cursor_step] = max(tracks[i].notes[tracks[i].cursor_step] + steps, -1)
+
+
 func set_note_active():
 	for i in range(tracks.size()):
 		if tracks[i].active:
@@ -250,6 +194,7 @@ func set_note_active():
 				tracks[i].notes[tracks[i].cursor_step] = -1
 			else:
 				tracks[i].notes[tracks[i].cursor_step] = 0
+
 
 func _unhandled_input(event):
 	if !controls_locked && event is InputEventKey:
@@ -278,11 +223,6 @@ func _unhandled_input(event):
 					play_goal_requested.emit()
 				KEY_S:
 					check_requested.emit()
-
-
-func play_note(midi_note: int):
-	var freq: float = midi_to_freq(midi_note)
-	generate_tone(freq, 0.2)  # 200ms note duration
 
 
 func get_current_pattern():
@@ -328,7 +268,10 @@ func show_notes():
 
 
 func set_wrong_notes(new_wrong_notes) -> void:
-	wrong_notes = new_wrong_notes
+		for i in range(new_wrong_notes.size()):
+			tracks[i].wrong_notes.resize(new_wrong_notes[i].size())
+			for j in range(new_wrong_notes[i].size()):
+				tracks[i].wrong_notes[j] = new_wrong_notes[i][j]
 
 
 func clear_wrong_notes() -> void:
@@ -336,7 +279,7 @@ func clear_wrong_notes() -> void:
 	for i in range(tracks.size()):
 		tracks[i].notes
 		cleared_wrong_notes.resize(tracks[i].num_steps)
-		wrong_notes = cleared_wrong_notes
+		tracks[i].wrong_notes = cleared_wrong_notes
 
 
 func lock_controls(locked: bool):

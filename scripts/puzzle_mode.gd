@@ -48,14 +48,19 @@ func stop_goal_pattern() -> void:
 func check_pattern() -> bool:
 	attempts += 1
 	var current_pattern = sequencer.get_current_pattern()
-	var wrong_notes: Array[bool]
+	var wrong_notes = []
 	wrong_notes.resize(current_pattern.size())
 
-	# Compare patterns and collect wrong notes
-	for x in range(len(current_pattern)):
-		wrong_notes[x] = current_pattern[x] != current_level.goal_pattern[x]
+	var goal_pattern = current_level.get_goal_pattern()
 
-	if wrong_notes.any(is_true):
+	# Compare patterns and collect wrong notes
+	for i in range(current_pattern.size()):
+		wrong_notes[i] = []
+		wrong_notes[i].resize(current_pattern[i].size())
+		for j in range(current_pattern[i].size()):
+			wrong_notes[i][j] = current_pattern[i][j] != goal_pattern[i][j]
+
+	if wrong_notes.any(any_true):
 		current_score = max(0, current_score - current_level.score_penalty)
 		ui.update_current_score(current_score)
 		pattern_check_failed.emit(wrong_notes)
@@ -68,6 +73,9 @@ func check_pattern() -> bool:
 		puzzle_completed.emit(total_score)
 		level_state_request_change.emit(PuzzleLevelState.States.WIN)
 		return true
+
+func any_true(val):
+	return val.any(is_true)
 
 func is_true(val):
 	return val

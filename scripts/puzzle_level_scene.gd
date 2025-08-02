@@ -40,6 +40,8 @@ func nextLevel():
 		puzzle_mode.play_goal_pattern()
 		sequencer.play_state()
 		level_state.SetState(PuzzleLevelState.States.PLAY)
+	elif level_set.size() == 1:
+		change_scene("main_menu")
 	else:
 		change_scene("final_score_win")
 		
