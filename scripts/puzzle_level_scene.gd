@@ -33,7 +33,9 @@ func nextLevel():
 		var level = level_set[current_level]
 		puzzle_ui.set_level_name(level.level_name)
 		puzzle_ui.set_level_description(level.description)
-		puzzle_mode.load_level(load(level.resource_path))
+		var loaded_level = load(level.resource_path)
+		puzzle_mode.load_level(loaded_level)
+		sequencer.setup_tracks(level)
 		await wait(.25)
 		puzzle_mode.play_goal_pattern()
 		sequencer.play_state()

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://vaeflrhhbexi"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_5ygqr"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_hrlks"]
+[ext_resource type="Resource" uid="uid://ci8jo14u3p64a" path="res://levels/level_2_1/level_2_1_track_1.tres" id="3_hrlks"]
+[ext_resource type="Resource" uid="uid://vpqfiyf35h1t" path="res://levels/level_2_1/level_2_1_track_2.tres" id="4_8ao56"]
+
+[resource]
+script = ExtResource("1_5ygqr")
+level_name = "Level 2-1"
+description = "Deja vu!"
+bpm = 120
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_hrlks")]([ExtResource("3_hrlks"), ExtResource("4_8ao56")])
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b02f6ypg4y7js" path="res://scripts/final_score_scene.gd" id="1_4sjga"]
 [ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="2_6huo8"]
 [ext_resource type="Texture2D" uid="uid://do8ov7ffsws14" path="res://assets/rgb_gradient.tres" id="3_n3yss"]
-[ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/ConfettiEmitter.gd" id="4_mj3wq"]
+[ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/confetti_emitter.gd" id="4_mj3wq"]
 
 [sub_resource type="CurveTexture" id="CurveTexture_co8vq"]
 

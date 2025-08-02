@@ -11,7 +11,7 @@ var attempts: int = 0
 var current_score: int= 0
 var total_score: int = 0
 var is_playing_goal: bool = false
-var original_pattern: Array[int]
+var original_pattern = []
 var level_complete: bool = false
 
 @onready var sequencer = $"../Sequencer"
@@ -32,7 +32,8 @@ func play_goal_pattern() -> void:
 		sequencer.stop()
 		original_pattern = sequencer.get_current_pattern()
 		sequencer.hide_notes()
-		sequencer.set_pattern(current_level.goal_pattern)
+		var goal_pattern = current_level.get_goal_pattern()
+		sequencer.set_pattern(goal_pattern)
 		sequencer.play()
 
 func stop_goal_pattern() -> void:

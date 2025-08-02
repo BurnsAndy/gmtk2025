@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=2 format=3 uid="uid://cfmsthr6baae4"]
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=3 format=3 uid="uid://cfmsthr6baae4"]
 
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_0ypi8"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_p7yfs"]
 
 [resource]
 script = ExtResource("1_0ypi8")
 level_name = "Level 1-5"
 description = "Did you think this was going to be easy?"
-goal_pattern = Array[int]([-1, 4, -1, 5, -1, 7, -1, 5, -1, 4, -1, 5, -1, 7, -1, 5])
 bpm = 120
 max_score = 1000
 score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_p7yfs")]([])
 metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

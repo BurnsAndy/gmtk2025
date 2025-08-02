@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SequencerTrackSettings" load_steps=2 format=3 uid="uid://vpqfiyf35h1t"]
+
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="1_dcoqs"]
+
+[resource]
+script = ExtResource("1_dcoqs")
+track_radius = 150
+step_radius = 15
+num_steps = 8
+goal_pattern = Array[int]([2, -1, -1, -1, 2, -1, -1, -1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
