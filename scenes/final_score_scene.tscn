@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://cq2vgf2bxt5vf"]
+
+[ext_resource type="Script" uid="uid://b02f6ypg4y7js" path="res://scripts/final_score_scene.gd" id="1_4sjga"]
+[ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="2_6huo8"]
+[ext_resource type="Texture2D" uid="uid://do8ov7ffsws14" path="res://assets/rgb_gradient.tres" id="3_n3yss"]
+[ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/ConfettiEmitter.gd" id="4_mj3wq"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_co8vq"]
+
+[sub_resource type="Curve" id="Curve_kt4lg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l83v5"]
+curve = SubResource("Curve_kt4lg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_snt4q"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 0, 0)
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 199.5
+initial_velocity_max = 200.5
+angular_velocity_min = 99.0
+angular_velocity_max = 101.0
+radial_velocity_min = -180.0
+radial_velocity_max = 180.0
+radial_velocity_curve = SubResource("CurveTexture_co8vq")
+gravity = Vector3(0, 500, 0)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_l83v5")
+color_initial_ramp = ExtResource("3_n3yss")
+
+[node name="FinalScoreScene" type="Node2D"]
+script = ExtResource("1_4sjga")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 648.0
+
+[node name="BgColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.359669, 0.276534, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -62.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="TitleRichTextLabel" type="RichTextLabel" parent="Control/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_6huo8")
+text = "Final Score"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="SubtitleRichTextLabel" type="RichTextLabel" parent="Control/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[i]You're winner![/i]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ScoreRichTextLabel" type="RichTextLabel" parent="Control/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_6huo8")
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1]1,000,000[/wave]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ReturnToMenuButton" type="Button" parent="Control/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return to Main Menu"
+
+[node name="ConfettiEmitter" type="GPUParticles2D" parent="."]
+position = Vector2(564, 151)
+emitting = false
+amount = 1000
+lifetime = 2.0
+explosiveness = 0.8
+randomness = 1.0
+fixed_fps = 12
+process_material = SubResource("ParticleProcessMaterial_snt4q")
+script = ExtResource("4_mj3wq")

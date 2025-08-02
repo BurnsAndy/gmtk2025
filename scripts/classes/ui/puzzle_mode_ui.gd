@@ -7,6 +7,8 @@ extends Control
 @onready var total_score_label = $TotalScoreLabel
 @onready var win_or_lose_label = $WinOrLoseLabel
 
+var script_utility = ScriptUtilities.new()
+
 func _ready() -> void:
 	win_or_lose_label.position = get_centered_position(win_or_lose_label.size)
 	win_or_lose_label.visible = false
@@ -18,10 +20,10 @@ func get_centered_position(size: Vector2) -> Vector2:
 	return Vector2(x, y)
 
 func update_current_score(score: int) -> void:
-	current_score_label.text = "Score: %d" % score
+	current_score_label.text = "Score: " + script_utility.int_to_str(score)
 	
 func update_total_score(score: int) -> void:
-	total_score_label.text = "Total Score: %d" % score
+	total_score_label.text = "Total Score: " + script_utility.int_to_str(score)
 	
 func show_win_or_lose(won: bool):
 	if won:

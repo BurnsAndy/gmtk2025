@@ -10,4 +10,5 @@ goal_pattern = Array[int]([0, -1, -1, -1, 0, -1, -1, -1, 0, -1, -1, -1, 0, -1, -
 bpm = 120
 max_score = 1000
 score_penalty = 100
+best_score = 0
 metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

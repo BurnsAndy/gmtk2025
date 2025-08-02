@@ -1,14 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cc5a2txvcsmjt"]
+[gd_scene load_steps=9 format=3 uid="uid://cc5a2txvcsmjt"]
 
 [ext_resource type="Script" uid="uid://d1m8ni62yfxlc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_8ln24"]
 [ext_resource type="Resource" uid="uid://dijfrcxjhmln4" path="res://levels/level_1-1.tres" id="3_rtw2f"]
-[ext_resource type="Resource" uid="uid://cfmsthr6baae4" path="res://levels/level_1-5.tres" id="3_tbmy8"]
 [ext_resource type="Resource" uid="uid://ck1qp7gcmxs6c" path="res://levels/level_1-2.tres" id="4_oa1go"]
 [ext_resource type="Resource" uid="uid://drbvjcp5nrume" path="res://levels/level_1-3.tres" id="5_tbmy8"]
 [ext_resource type="Resource" uid="uid://bfeek6limlyec" path="res://levels/level_1-4.tres" id="6_oa1go"]
 [ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="6_rtw2f"]
-[ext_resource type="Resource" uid="uid://700633a2wn6b" path="res://levels/level_1-6.tres" id="8_jk1qb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font_size = 54
@@ -19,7 +17,7 @@ shadow_color = Color(0, 0, 0, 0.862745)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_l6cm7")
-all_levels = Array[ExtResource("2_8ln24")]([ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8"), ExtResource("6_oa1go"), ExtResource("3_tbmy8"), ExtResource("8_jk1qb")])
+all_levels = Array[ExtResource("2_8ln24")]([ExtResource("6_oa1go"), ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8")])
 
 [node name="MainMenuUI" type="Control" parent="."]
 layout_mode = 3

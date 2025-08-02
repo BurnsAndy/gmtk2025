@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=2 format=3 uid="uid://700633a2wn6b"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_pyyqy"]
+
+[resource]
+script = ExtResource("1_pyyqy")
+level_name = "Level 1-6"
+description = "1 / 2^4"
+goal_pattern = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7])
+bpm = 120
+max_score = 1000
+score_penalty = 100
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

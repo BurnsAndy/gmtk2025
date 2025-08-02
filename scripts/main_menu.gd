@@ -3,7 +3,7 @@ extends Node
 @onready var FreeplayModeButton = $MainMenuUI/BoxContainer/FreeplayModeButton
 @onready var LevelSelectButton = $MainMenuUI/BoxContainer/LevelSelectButton
 @export var all_levels: Array[PuzzleLevel]
-const puzzle_level_scene = preload("res://scenes/puzzle_level.tscn")
+const puzzle_level_scene = preload("res://scenes/puzzle_level_scene.tscn")
 const level_select_scene = preload("res://scenes/level_select.tscn")
 
 

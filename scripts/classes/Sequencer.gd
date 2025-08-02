@@ -2,25 +2,26 @@ extends Node2D
 
 # Constants
 const TRACK_RADIUS: int = 200
-const NUM_STEPS: int    = 16
+const STEP_RADIUS: int = 20
+@export var NUM_STEPS: int    = 16
 const CENTER_X: int     = 512  # Will be adjusted based on viewport
 const CENTER_Y: int     = 300  # Will be adjusted based on viewport
 # Playback variables
-var playhead_angle: float   = 0.0
-var bpm: float              = 120.0
+@export var bpm: float              = 120.0
+@export var note_scale: Array[Variant] = [62, 64, 66, 67, 69, 71, 73, 74]  # MIDI note numbers
+@export var note_names: Array[Variant] = ["D", "E", "F#", "G", "A", "B", "C#", "D"]
+var notes: Array[int] = []
 var steps_per_second: float = (bpm / 60.0) * 4.0  # 16th notes
 var angle_per_step: float   = 360.0 / NUM_STEPS
 # Sequencer state
+var playhead_angle: float   = 0.0
 var cursor_step: int  = 0
-var notes: Array[int] = []
 var wrong_notes: Array[bool] = []
 var playing: bool     = true
 var notes_hidden: bool = false
 var last_step: int    = -1
 # Musical scale (D major)
-var note_scale: Array[Variant] = [62, 64, 66, 67, 69, 71, 73, 74]  # MIDI note numbers
-var note_names: Array[Variant] = ["D", "E", "F#", "G", "A", "B", "C#", "D"]
-var controls_locked: bool = false
+var controls_locked: bool = true
 
 signal pattern_complete
 signal check_requested
@@ -30,8 +31,7 @@ signal play_goal_requested
 
 var audio_generator: AudioStreamGenerator
 var audio_playback: AudioStreamGeneratorPlayback
-const SAMPLE_RATE: int = 44100
-const BUFFER_SIZE: int = 2048
+const SAMPLE_RATE: int = 22050 #44100
 const TAU_FLOAT: float = TAU  # For our sine wave calculation
 const A4_FREQ: float = 440.0  # A4 note frequency (MIDI note 69)
 const NOTE_COLORS: Dictionary = {
@@ -64,7 +64,7 @@ func _ready() -> void:
 	wrong_notes.resize(NUM_STEPS)
 
 	clear_pattern()
-
+	stop()
 	# Center position should be based on viewport size
 	var viewport_size: Rect2 = get_viewport_rect()
 	position = Vector2(viewport_size.size.x/2, viewport_size.size.y/2)
@@ -85,8 +85,9 @@ func _ready() -> void:
 
 func setup_audio():
 	audio_generator = AudioStreamGenerator.new()
-	audio_generator.buffer_length = 0.1  # 100ms buffer
+	audio_generator.buffer_length = .1 # * 100 = ms
 	audio_generator.mix_rate = SAMPLE_RATE
+	audio_generator.mix_rate_mode = AudioStreamGenerator.MIX_RATE_CUSTOM
 
 	audio_player.stream = audio_generator
 	audio_player.play()
@@ -175,7 +176,7 @@ func _draw():
 
 		var color: Color = Color.DARK_GRAY
 		color = _get_note_color(i)
-		draw_circle(pos, 6, color)
+		draw_circle(pos, STEP_RADIUS, color)
 		if wrong_notes[i]:
 			draw_wrong_note_indicator(pos)
 
@@ -187,7 +188,7 @@ func _draw():
 									  sin(cursor_angle) * TRACK_RADIUS
 								  )
 		draw_circle(cursor_pos, 8, Color.TRANSPARENT)
-		draw_arc(cursor_pos, 8, 0, TAU, 16, Color.RED)
+		draw_arc(cursor_pos, STEP_RADIUS + (STEP_RADIUS * 0.25), 0, TAU, STEP_RADIUS*2, Color.RED)
 
 	# Draw playhead
 	var playhead_rad: float   = deg_to_rad(playhead_angle)

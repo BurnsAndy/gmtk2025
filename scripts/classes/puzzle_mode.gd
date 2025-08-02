@@ -19,8 +19,6 @@ var level_complete: bool = false
 
 func load_level(level: PuzzleLevel) -> void:
 	current_level = level
-	if current_score > 0:
-		total_score += current_score
 	current_score = level.max_score
 	attempts = 0
 	sequencer.clear_pattern()
@@ -64,7 +62,9 @@ func check_pattern() -> bool:
 			level_state_request_change.emit(PuzzleLevelState.States.LOSE)
 		return false
 	else:
-		puzzle_completed.emit(current_score)
+		total_score += current_score
+		ui.update_total_score(total_score)
+		puzzle_completed.emit(total_score)
 		level_state_request_change.emit(PuzzleLevelState.States.WIN)
 		return true
 
