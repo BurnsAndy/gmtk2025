@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=6 format=3 uid="uid://dgl58pwfdi3ny"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_qahdc"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_xt6p1"]
+
+[sub_resource type="Resource" id="Resource_6h3lr"]
+script = ExtResource("2_xt6p1")
+track_radius = 220
+step_radius = 20
+num_steps = 16
+goal_pattern = Array[int]([0, 3, -1, 5, 6, -1, 7, -1, 0, 3, -1, 6, 5, -1, 7, -1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_dj67d"]
+script = ExtResource("2_xt6p1")
+track_radius = 170
+step_radius = 15
+num_steps = 6
+goal_pattern = Array[int]([0, 2, 4, 0, 2, 4])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_6vcge"]
+script = ExtResource("2_xt6p1")
+track_radius = 120
+step_radius = 12
+num_steps = 8
+goal_pattern = Array[int]([0, 7, 0, 7, 0, 7, 0, 7])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_qahdc")
+level_name = "Level 3-5"
+description = "Root of the problem."
+bpm = 180
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_xt6p1")]([SubResource("Resource_6h3lr"), SubResource("Resource_dj67d"), SubResource("Resource_6vcge")])
+cubes = false
+minor = false
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=6 format=3 uid="uid://dcbclopxydkyx"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_xi2jf"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_kdigk"]
+
+[sub_resource type="Resource" id="Resource_dj67d"]
+script = ExtResource("2_kdigk")
+track_radius = 200
+step_radius = 20
+num_steps = 12
+goal_pattern = Array[int]([0, 2, 4, 1, 4, 5, 2, 4, 6, 1, 4, 6])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_6vcge"]
+script = ExtResource("2_kdigk")
+track_radius = 150
+step_radius = 15
+num_steps = 4
+goal_pattern = Array[int]([0, 4, 2, 4])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_ip0br"]
+script = ExtResource("2_kdigk")
+track_radius = 100
+step_radius = 10
+num_steps = 12
+goal_pattern = Array[int]([0, 0, 0, 4, 4, 4, 2, 2, 2, 4, 4, 4])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_xi2jf")
+level_name = "Level 3-6"
+description = "Thematic."
+bpm = 180
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_kdigk")]([SubResource("Resource_dj67d"), SubResource("Resource_6vcge"), SubResource("Resource_ip0br")])
+cubes = false
+minor = false
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

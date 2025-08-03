@@ -22,6 +22,8 @@ func _ready() -> void:
 	sequencer.play_goal_requested.connect(puzzle_mode.play_goal_pattern)
 	sequencer.play_goal_cancel_requested.connect(puzzle_mode.stop_goal_pattern)
 	sequencer.toggle_controls.connect(puzzle_ui.toggle_controls)
+	if (level_set.size() < 2):
+		puzzle_ui.toggle_total_score()
 	
 	change_scene("next_level")
 

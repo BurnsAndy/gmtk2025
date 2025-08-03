@@ -31,6 +31,9 @@ func update_current_score(score: int) -> void:
 func update_total_score(score: int) -> void:
 	total_score_label.text = "Total Score: " + script_utility.int_to_str(score)
 	
+func toggle_total_score():
+	total_score_label.visible = !total_score_label.visible
+	
 func show_win_or_lose(won: bool, last_level: bool = false):
 	if won:
 		win_or_lose_label.text = "YOU WIN!"

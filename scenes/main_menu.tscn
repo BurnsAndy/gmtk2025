@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cc5a2txvcsmjt"]
+[gd_scene load_steps=34 format=3 uid="uid://cc5a2txvcsmjt"]
 
 [ext_resource type="Script" uid="uid://d1m8ni62yfxlc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_8ln24"]
@@ -11,49 +11,26 @@
 [ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="6_rtw2f"]
 [ext_resource type="Resource" uid="uid://700633a2wn6b" path="res://levels/level_1-6.tres" id="8_jk1qb"]
 [ext_resource type="Resource" uid="uid://b6xdwvwsdb1vt" path="res://levels/level_2_2.tres" id="10_flqon"]
-[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="10_lgwnu"]
 [ext_resource type="Resource" uid="uid://bxf0kn18ym8ko" path="res://levels/level_2_3.tres" id="11_flqon"]
 [ext_resource type="Resource" uid="uid://dm3ug103awsr2" path="res://levels/level_2_4.tres" id="12_1ajci"]
 [ext_resource type="Resource" uid="uid://e1t8levjqjq0" path="res://levels/level_2_5.tres" id="13_1ajci"]
 [ext_resource type="Resource" uid="uid://fo5md1sgj0u2" path="res://levels/level_2_6.tres" id="14_a8gd2"]
 [ext_resource type="Resource" uid="uid://bj4ikhdkiqcna" path="res://levels/level_2_7.tres" id="15_hstxw"]
 [ext_resource type="Resource" uid="uid://baq6lpxn2soy0" path="res://levels/level_2_8.tres" id="16_8egab"]
+[ext_resource type="Resource" uid="uid://chvhh0ubk00ad" path="res://levels/level_2_9.tres" id="17_6h3lr"]
 [ext_resource type="PackedScene" uid="uid://duqnwl4lwb5fn" path="res://scenes/volume_slider.tscn" id="18_hstxw"]
+[ext_resource type="Resource" uid="uid://khu3mgr03csv" path="res://levels/level_3_1.tres" id="18_vr8o3"]
+[ext_resource type="Resource" uid="uid://ei0ipbv5o54g" path="res://levels/level_3_2.tres" id="19_1a85y"]
 [ext_resource type="FontFile" uid="uid://cnros5ufijo10" path="res://assets/fonts/Positive System.otf" id="19_gw5y6"]
 [ext_resource type="PackedScene" uid="uid://b1r084b8sxtdm" path="res://scenes/crt_effect.tscn" id="20_8egab"]
+[ext_resource type="Resource" uid="uid://bsbdhio3dmtxc" path="res://levels/level_3_3.tres" id="20_hl5e0"]
+[ext_resource type="Resource" uid="uid://b3sdddt1vih4u" path="res://levels/level_3_4.tres" id="21_engjn"]
 [ext_resource type="PackedScene" uid="uid://bx0u14bty8rqm" path="res://scenes/polyphonic_audio_player.tscn" id="22_3wgol"]
+[ext_resource type="Resource" uid="uid://dgl58pwfdi3ny" path="res://levels/level_3_5.tres" id="22_6h3lr"]
 [ext_resource type="Script" uid="uid://b0t3mmdcvowi7" path="res://scripts/classes/audio_library.gd" id="23_1acrt"]
+[ext_resource type="Resource" uid="uid://dcbclopxydkyx" path="res://levels/level_3_6.tres" id="23_6h3lr"]
 [ext_resource type="Script" uid="uid://xwsen5j60ci3" path="res://scripts/classes/sound_effect.gd" id="24_vr8o3"]
 [ext_resource type="AudioStream" uid="uid://dq0qo3r1ygprn" path="res://assets/audio/theme.wav" id="25_1a85y"]
-
-[sub_resource type="Resource" id="Resource_gw5y6"]
-script = ExtResource("10_lgwnu")
-track_radius = 200
-step_radius = 15
-num_steps = 32
-goal_pattern = Array[int]([0, 2, 4, 5, 6, 5, 4, 2, 3, 4, 5, 4, 3, 2, 1, 0, 4, 5, 6, 7, 6, 5, 4, 2, 3, 4, 5, 4, 3, 2, 1, 0])
-metadata/_custom_type_script = "uid://uyds5miy56i0"
-
-[sub_resource type="Resource" id="Resource_svtp6"]
-script = ExtResource("10_lgwnu")
-track_radius = 150
-step_radius = 10
-num_steps = 32
-goal_pattern = Array[int]([0, -1, 4, -1, 5, -1, 4, -1, 3, -1, 5, 4, 3, 2, 1, 0, 4, -1, 3, -1, 0, -1, 4, -1, 4, -1, 5, 4, 3, 2, 1, 0])
-metadata/_custom_type_script = "uid://uyds5miy56i0"
-
-[sub_resource type="Resource" id="Resource_1dfpl"]
-script = ExtResource("2_8ln24")
-level_name = "Level 2-8"
-description = "Just a minuet."
-bpm = 160
-max_score = 1000
-score_penalty = 100
-best_score = 0
-track_settings = Array[ExtResource("10_lgwnu")]([SubResource("Resource_gw5y6"), SubResource("Resource_svtp6")])
-cubes = false
-minor = false
-metadata/_custom_type_script = "uid://dlvmfqij2g0ha"
 
 [sub_resource type="Resource" id="Resource_hl5e0"]
 script = ExtResource("24_vr8o3")
@@ -68,7 +45,7 @@ metadata/_custom_type_script = "uid://b0t3mmdcvowi7"
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_l6cm7")
-all_levels = Array[ExtResource("2_8ln24")]([ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8"), ExtResource("6_oa1go"), ExtResource("3_tbmy8"), ExtResource("8_jk1qb"), ExtResource("3_5dd4i"), ExtResource("10_flqon"), ExtResource("11_flqon"), ExtResource("12_1ajci"), ExtResource("13_1ajci"), ExtResource("14_a8gd2"), ExtResource("15_hstxw"), ExtResource("16_8egab"), SubResource("Resource_1dfpl")])
+all_levels = Array[ExtResource("2_8ln24")]([ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8"), ExtResource("6_oa1go"), ExtResource("3_tbmy8"), ExtResource("8_jk1qb"), ExtResource("3_5dd4i"), ExtResource("10_flqon"), ExtResource("11_flqon"), ExtResource("12_1ajci"), ExtResource("13_1ajci"), ExtResource("14_a8gd2"), ExtResource("15_hstxw"), ExtResource("16_8egab"), ExtResource("17_6h3lr"), ExtResource("18_vr8o3"), ExtResource("19_1a85y"), ExtResource("20_hl5e0"), ExtResource("21_engjn"), ExtResource("22_6h3lr"), ExtResource("23_6h3lr")])
 
 [node name="MainMenuUI" type="Control" parent="."]
 layout_mode = 3

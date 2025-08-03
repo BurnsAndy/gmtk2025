@@ -24,7 +24,6 @@ offset_left = 25.0
 offset_top = 39.0
 offset_right = 1123.0
 offset_bottom = 649.0
-alignment = 1
 
 [node name="CrtEffect" parent="." instance=ExtResource("3_2epne")]
 anchors_preset = 0
