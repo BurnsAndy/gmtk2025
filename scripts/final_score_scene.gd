@@ -12,8 +12,8 @@ extends Node2D
 @onready var background_color = $Control/BgColorRect
 @onready var confetti = $ConfettiEmitter
 
-const color_winrar:Color = Color(0.20392157, 0.5764706, 0.48235294)
-const color_youre_a_loser:Color = Color(0.54901963, 0.14117648, 0.1764706)
+const color_winrar:Color = Color(0.105882354, 0.6, 0.54509807)
+const color_youre_a_loser:Color = Color(0.85882354, 0.32941177, 0.38039216)
 
 var script_utility = ScriptUtilities.new()
 
