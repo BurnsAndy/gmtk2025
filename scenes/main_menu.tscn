@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cc5a2txvcsmjt"]
+[gd_scene load_steps=22 format=3 uid="uid://cc5a2txvcsmjt"]
 
 [ext_resource type="Script" uid="uid://d1m8ni62yfxlc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_8ln24"]
@@ -48,13 +48,6 @@ cubes = false
 minor = false
 metadata/_custom_type_script = "uid://dlvmfqij2g0ha"
 
-[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
-font_size = 54
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 10
-shadow_color = Color(0, 0, 0, 0.862745)
-
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_l6cm7")
 all_levels = Array[ExtResource("2_8ln24")]([ExtResource("3_rtw2f"), ExtResource("4_oa1go"), ExtResource("5_tbmy8"), ExtResource("6_oa1go"), ExtResource("3_tbmy8"), ExtResource("8_jk1qb"), ExtResource("3_5dd4i"), ExtResource("10_flqon"), ExtResource("11_flqon"), ExtResource("12_1ajci"), ExtResource("13_1ajci"), ExtResource("14_a8gd2"), ExtResource("15_hstxw"), ExtResource("16_8egab"), SubResource("Resource_1dfpl")])
@@ -71,7 +64,7 @@ size_flags_vertical = 3
 layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0.270588, 0.239216, 0.290196, 1)
+color = Color(0.000367875, 0.0877424, 0.102399, 1)
 
 [node name="BoxContainer" type="BoxContainer" parent="MainMenuUI"]
 layout_mode = 0
@@ -80,10 +73,18 @@ offset_bottom = 648.0
 alignment = 1
 vertical = true
 
-[node name="Label" type="Label" parent="MainMenuUI/BoxContainer"]
+[node name="Label" type="RichTextLabel" parent="MainMenuUI/BoxContainer"]
 layout_mode = 2
-text = "<game title>"
-label_settings = SubResource("LabelSettings_vue75")
+theme = ExtResource("6_rtw2f")
+text = "CR//KLS"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[i]a circular music sequencer puzzle game[/i]"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="PlayAllLevelsButton" type="Button" parent="MainMenuUI/BoxContainer"]
@@ -93,16 +94,17 @@ size_flags_vertical = 4
 theme = ExtResource("6_rtw2f")
 text = "Play All Levels"
 
-[node name="FreeplayModeButton" type="Button" parent="MainMenuUI/BoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("6_rtw2f")
-text = "Freeplay Mode"
-
 [node name="LevelSelectButton" type="Button" parent="MainMenuUI/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("6_rtw2f")
 text = "Level Select"
+
+[node name="FreeplayModeButton" type="Button" parent="MainMenuUI/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_rtw2f")
+disabled = true
+text = "Freeplay Mode"
