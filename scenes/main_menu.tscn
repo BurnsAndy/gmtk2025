@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc5a2txvcsmjt"]
+[gd_scene load_steps=23 format=3 uid="uid://cc5a2txvcsmjt"]
 
 [ext_resource type="Script" uid="uid://d1m8ni62yfxlc" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="2_8ln24"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://fo5md1sgj0u2" path="res://levels/level_2_6.tres" id="14_a8gd2"]
 [ext_resource type="Resource" uid="uid://bj4ikhdkiqcna" path="res://levels/level_2_7.tres" id="15_hstxw"]
 [ext_resource type="Resource" uid="uid://baq6lpxn2soy0" path="res://levels/level_2_8.tres" id="16_8egab"]
+[ext_resource type="PackedScene" uid="uid://duqnwl4lwb5fn" path="res://scenes/volume_slider.tscn" id="18_hstxw"]
 
 [sub_resource type="Resource" id="Resource_gw5y6"]
 script = ExtResource("10_lgwnu")
@@ -62,8 +63,17 @@ size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="MainMenuUI"]
 layout_mode = 1
-offset_right = 1152.0
-offset_bottom = 648.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.000367875, 0.0877424, 0.102399, 1)
 
 [node name="BoxContainer" type="BoxContainer" parent="MainMenuUI"]
@@ -92,23 +102,48 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayAllLevelsButton" type="Button" parent="MainMenuUI/BoxContainer"]
+[node name="Control" type="Control" parent="MainMenuUI/BoxContainer"]
+custom_minimum_size = Vector2(0, 67.95)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("6_rtw2f")
-text = "                           "
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/BoxContainer/PlayAllLevelsButton"]
-layout_mode = 0
-offset_right = 196.0
-offset_bottom = 40.0
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/BoxContainer/Control"]
+custom_minimum_size = Vector2(0, 30.585)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]Play All Levels[/pulse]"
 fit_content = true
 scroll_active = false
+shortcut_keys_enabled = false
 horizontal_alignment = 1
 vertical_alignment = 1
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="PlayAllLevelsButton" type="Button" parent="MainMenuUI/BoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.5
+offset_top = -23.5
+offset_right = 119.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_rtw2f")
+text = "                                 "
 
 [node name="LevelSelectButton" type="Button" parent="MainMenuUI/BoxContainer"]
 layout_mode = 2
@@ -124,3 +159,17 @@ size_flags_vertical = 4
 theme = ExtResource("6_rtw2f")
 disabled = true
 text = "Freeplay Mode"
+
+[node name="VolumeSlider" parent="MainMenuUI" instance=ExtResource("18_hstxw")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -246.0
+offset_top = -39.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0

@@ -1,5 +1,5 @@
 extends Node
-@onready var PlayAllLevelsButton = $MainMenuUI/BoxContainer/PlayAllLevelsButton
+@onready var PlayAllLevelsButton = $MainMenuUI/BoxContainer/Control/PlayAllLevelsButton
 @onready var FreeplayModeButton = $MainMenuUI/BoxContainer/FreeplayModeButton
 @onready var LevelSelectButton = $MainMenuUI/BoxContainer/LevelSelectButton
 @export var all_levels: Array[PuzzleLevel]

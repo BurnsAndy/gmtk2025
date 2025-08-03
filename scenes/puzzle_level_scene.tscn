@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dharp37746f5j"]
+[gd_scene load_steps=26 format=3 uid="uid://dharp37746f5j"]
 
 [ext_resource type="Script" uid="uid://73pkmj273qjj" path="res://scripts/puzzle_level_scene.gd" id="1_wvkbx"]
 [ext_resource type="PackedScene" uid="uid://bx0u14bty8rqm" path="res://scenes/polyphonic_audio_player.tscn" id="4_qpt1g"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/confetti_emitter.gd" id="10_dagly"]
 [ext_resource type="Resource" uid="uid://be4sk7totaj65" path="res://assets/audio/samples/instr2/instr2_audio_library.tres" id="10_vjcl8"]
 [ext_resource type="Resource" uid="uid://w1vaeb5vc4mo" path="res://assets/audio/samples/instr3/instr1_audio_library.tres" id="11_e03pu"]
+[ext_resource type="PackedScene" uid="uid://duqnwl4lwb5fn" path="res://scenes/volume_slider.tscn" id="14_mvy5p"]
 
 [sub_resource type="Resource" id="Resource_pi3p7"]
 script = ExtResource("6_nq7dn")
@@ -98,8 +99,11 @@ position = Vector2(1250.36, 180.44)
 audio_library = ExtResource("11_e03pu")
 
 [node name="PuzzleUI" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 script = ExtResource("7_mvy5p")
 
 [node name="LevelNameLabel" type="Label" parent="PuzzleUI"]
@@ -174,6 +178,14 @@ label_settings = SubResource("LabelSettings_kal5q")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="VolumeSlider" parent="PuzzleUI" instance=ExtResource("14_mvy5p")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="ConfettiEmitter" type="GPUParticles2D" parent="."]
 position = Vector2(564, 151)
