@@ -15,8 +15,8 @@ func _ready() -> void:
 	polyphonic_audio_player.play_sound_effect_from_library("theme")
 	
 func _PlayAllLevelsButtons_pressed():
+	polyphonic_audio_player.stop_sound("theme")
 	var instance = puzzle_level_scene.instantiate()
-	
 	#set any properties for the scene here
 	instance.level_set = all_levels
 	
@@ -28,9 +28,9 @@ func _FreeplayModeButton_pressed():
 	pass
 	
 func _LevelSelectButton_pressed():
+	polyphonic_audio_player.stop_sound("theme")
 	var instance = level_select_scene.instantiate()
 	instance.all_levels = all_levels
 	get_tree().root.add_child(instance)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = instance
-	

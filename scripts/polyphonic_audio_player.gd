@@ -14,3 +14,10 @@ func play_sound_effect_from_library(_tag: String):
 		polyphonic_stream_playback.play_stream(audio_stream)
 	else:
 		printerr("Not tag provided. Can't play sound effect.")
+
+func stop_sound(_tag: String):
+	if _tag:
+		var audio_stream = audio_library.get_audio_stream(_tag)
+		if playing: self.stop()
+	else:
+		printerr("Not tag provided. Can't stop, won't stop.")
