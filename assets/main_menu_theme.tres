@@ -1,4 +1,28 @@
-[gd_resource type="Theme" format=3 uid="uid://cbatwpb6ydnvr"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cbatwpb6ydnvr"]
+
+[ext_resource type="FontFile" uid="uid://daa32wde8rlm0" path="res://assets/fonts/INVASION2000.TTF" id="1_hpa6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpa6i"]
+bg_color = Color(0.237966, 0.306303, 0.240502, 1)
 
 [resource]
-default_font_size = 28
+default_font = ExtResource("1_hpa6i")
+default_font_size = 32
+/colors/CoolGray = Color(0.552941, 0.568627, 0.780392, 1)
+/colors/Cyan = Color(0.0313726, 0.698039, 0.890196, 1)
+/colors/Dun = Color(0.882353, 0.803922, 0.709804, 1)
+/colors/EnglishViolet = Color(0.298039, 0.207843, 0.286275, 1)
+/colors/Gamboge = Color(0.945098, 0.635294, 0.0313726, 1)
+/colors/IndianRed = Color(0.858824, 0.329412, 0.380392, 1)
+/colors/LightGreen = Color(0.509804, 1, 0.619608, 1)
+/colors/PersianGreen = Color(0.105882, 0.6, 0.545098, 1)
+/colors/RichBlack = Color(0, 0.0862745, 0.101961, 1)
+/colors/Sunset = Color(1, 0.796078, 0.466667, 1)
+/colors/Viridian = Color(0.356863, 0.509804, 0.4, 1)
+/fonts/MainFont = ExtResource("1_hpa6i")
+Button/colors/font_color = Color(0.882353, 0.803922, 0.709804, 1)
+Button/colors/font_disabled_color = Color(0.882353, 0.803922, 0.709804, 0.262745)
+Button/colors/font_outline_color = Color(0.356863, 0.509804, 0.4, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_hpa6i")
+Label/colors/font_color = Color(0.882353, 0.803922, 0.709804, 1)
+RichTextLabel/colors/default_color = Color(0.882353, 0.803922, 0.709804, 1)

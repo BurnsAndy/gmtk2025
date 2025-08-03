@@ -29,4 +29,5 @@ score_penalty = 100
 best_score = 0
 track_settings = Array[ExtResource("2_ugykg")]([SubResource("Resource_7b55j"), SubResource("Resource_5pajh")])
 cubes = true
+minor = false
 metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

@@ -20,13 +20,12 @@ func save_settings():
 func set_master_volume(value: float):
 	var adjusted_value = (MAX_VOL * value) / 100
 	var volume_db = linear_to_db(adjusted_value) 
-	prints("adjusting vol to ", (adjusted_value*100), "%, ", volume_db, "db")
 	AudioServer.set_bus_volume_db(0, volume_db)
 	config.set_value("audio", "master_volume", value)
 	save_settings()
 
 func get_master_volume() -> float:
-	return config.get_value("audio", "master_volume", 100.0)
+	return config.get_value("audio", "master_volume", 75.0)
 
 func apply_volume():
 	set_master_volume(get_master_volume())

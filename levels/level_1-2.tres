@@ -13,4 +13,6 @@ max_score = 1000
 score_penalty = 100
 best_score = 0
 track_settings = Array[ExtResource("2_n4nfa")]([ExtResource("3_e8j07")])
+cubes = false
+minor = false
 metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

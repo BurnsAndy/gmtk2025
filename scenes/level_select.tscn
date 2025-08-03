@@ -1,13 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwwifiiy4fk1l"]
+[gd_scene load_steps=4 format=3 uid="uid://bwwifiiy4fk1l"]
 
 [ext_resource type="Script" uid="uid://diql14twikh1b" path="res://scripts/level_select.gd" id="1_3shnc"]
+[ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="2_p0wlc"]
+[ext_resource type="PackedScene" uid="uid://b1r084b8sxtdm" path="res://scenes/crt_effect.tscn" id="3_2epne"]
 
 [node name="LevelSelect" type="Node2D"]
 script = ExtResource("1_3shnc")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0.0862745, 0.101961, 1)
+
 [node name="Label" type="Label" parent="."]
 offset_right = 91.0
 offset_bottom = 23.0
+theme = ExtResource("2_p0wlc")
 text = "Level Select"
 
 [node name="FlowContainer" type="FlowContainer" parent="."]
@@ -16,3 +25,12 @@ offset_top = 39.0
 offset_right = 1123.0
 offset_bottom = 649.0
 alignment = 1
+
+[node name="CrtEffect" parent="." instance=ExtResource("3_2epne")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1

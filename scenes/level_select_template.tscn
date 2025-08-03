@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://py2qylg8iqc4"]
+[gd_scene load_steps=3 format=3 uid="uid://py2qylg8iqc4"]
 
+[ext_resource type="Theme" uid="uid://cbatwpb6ydnvr" path="res://assets/main_menu_theme.tres" id="1_2fv4f"]
 [ext_resource type="Script" uid="uid://gawu21oqc8m0" path="res://scripts/level_select_template.gd" id="1_wbxww"]
 
 [node name="LevelSelectTemplate" type="Panel"]
@@ -8,13 +9,14 @@ offset_right = 214.0
 offset_bottom = 135.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_2fv4f")
 script = ExtResource("1_wbxww")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 214.0
 offset_bottom = 135.0
-color = Color(0.473976, 0.473976, 0.473976, 1)
+color = Color(0.356863, 0.509804, 0.4, 1)
 
 [node name="LevelDetailsRichTextLabel" type="RichTextLabel" parent="ColorRect"]
 layout_mode = 1
@@ -25,6 +27,7 @@ offset_top = 8.0
 offset_right = -10.0
 offset_bottom = 104.0
 grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 16
 text = "Level: 
 Description:
 Best Score:"
@@ -38,4 +41,5 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 28
 text = "Play Level"

@@ -21,6 +21,7 @@ func _ready() -> void:
 	sequencer.check_requested.connect(_on_check_requested)
 	sequencer.play_goal_requested.connect(puzzle_mode.play_goal_pattern)
 	sequencer.play_goal_cancel_requested.connect(puzzle_mode.stop_goal_pattern)
+	sequencer.toggle_controls.connect(puzzle_ui.toggle_controls)
 	
 	change_scene("next_level")
 
@@ -91,6 +92,7 @@ func level_win():
 	confetti_emitter.celebrate()
 	sequencer.win_state()
 	level_set[current_level].update_best_score(puzzle_mode.current_score)
+	var last_level = current_level == level_set.size()
 	puzzle_ui.show_win_or_lose(true)
 
 func level_lose():
@@ -115,6 +117,4 @@ func change_scene(new_scene: String):
 			nextLevel()
 
 func wait(seconds: float) -> void:
-	prints("waiting for", seconds)
 	await get_tree().create_timer(seconds).timeout
-	print("done waiting")
