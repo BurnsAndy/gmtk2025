@@ -17,6 +17,7 @@ var controls_locked: bool = true
 var click_enabled: bool   = true
 var current_step: int     = 0
 var cubes:bool = false
+var minor:bool = false
 @onready var instr_1_polyphonic_audio_player: AudioStreamPlayer2D = $instr1_PolyphonicAudioPlayer
 @onready var instr_2_polyphonic_audio_player: AudioStreamPlayer2D = $instr2_PolyphonicAudioPlayer
 @onready var instr_3_polyphonic_audio_player: AudioStreamPlayer2D = $instr3_PolyphonicAudioPlayer
@@ -72,6 +73,7 @@ func setup_tracks(level: PuzzleLevel):
 	tracks[0].active = true
 	bpm = level.bpm
 	cubes = level.cubes
+	minor = level.minor
 	steps_per_second = (bpm / 60)# * tracks[0].num_steps
 	
 func _ready() -> void:
@@ -99,15 +101,16 @@ func _process(delta):
 	queue_redraw()
 
 func play_sample(track_index:int, note_index:int):
-	#currently each instrument has 8 notes on a dmajor scale labeled 0-8
-	#might want to prefix those samples in their library with "dmajor_" if you want other scales
+	var prefix: String = ""
+	if minor:
+		prefix = "aminor_"
 	match track_index:
 		0:
-			instr_3_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
+			instr_3_polyphonic_audio_player.play_sound_effect_from_library(prefix + str(note_index))
 		1:
-			instr_2_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
+			instr_2_polyphonic_audio_player.play_sound_effect_from_library(prefix + str(note_index))
 		2:
-			instr_1_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
+			instr_1_polyphonic_audio_player.play_sound_effect_from_library(prefix + str(note_index))
 
 func play_click():
 	var sample: String         = "click_1"
@@ -227,7 +230,7 @@ func set_note_active():
 
 func _unhandled_input(event):
 	if event is InputEventKey:
-		if event.pressed && (!controls_locked || event.keycode == KEY_A || event.keycode == KEY_H):
+		if event.pressed && (!controls_locked || event.keycode == KEY_A || event.keycode == KEY_H || event.keycode == KEY_Q):
 			match event.keycode:
 				KEY_LEFT:
 					cursor_move(-1)
@@ -259,6 +262,8 @@ func _unhandled_input(event):
 					click_enabled = !click_enabled
 				KEY_H:
 					toggle_controls.emit()
+				KEY_Q:
+					minor = !minor
 
 
 func get_current_pattern():

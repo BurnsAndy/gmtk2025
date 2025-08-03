@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AudioLibrary" load_steps=19 format=3 uid="uid://be4sk7totaj65"]
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=35 format=3 uid="uid://be4sk7totaj65"]
 
 [ext_resource type="Script" uid="uid://b0t3mmdcvowi7" path="res://scripts/classes/audio_library.gd" id="1_mgsr4"]
 [ext_resource type="Script" uid="uid://xwsen5j60ci3" path="res://scripts/classes/sound_effect.gd" id="2_05igt"]
@@ -10,6 +10,14 @@
 [ext_resource type="AudioStream" uid="uid://cgwcsrlsv0k3n" path="res://assets/audio/samples/instr2/dmajor/5-b5.wav" id="8_mxfw2"]
 [ext_resource type="AudioStream" uid="uid://beiy46enjvtip" path="res://assets/audio/samples/instr2/dmajor/6-c#5.wav" id="9_148ix"]
 [ext_resource type="AudioStream" uid="uid://x4re3tv34v16" path="res://assets/audio/samples/instr2/dmajor/7-d5.wav" id="10_dbbjy"]
+[ext_resource type="AudioStream" uid="uid://ccxlvh6op4dur" path="res://assets/audio/samples/instr2/aminor/0-a4.wav" id="11_148ix"]
+[ext_resource type="AudioStream" uid="uid://03moskdtf3ox" path="res://assets/audio/samples/instr2/aminor/1-b4.wav" id="12_dbbjy"]
+[ext_resource type="AudioStream" uid="uid://cr7xubgv1wy6y" path="res://assets/audio/samples/instr2/aminor/2-c4.wav" id="13_wpgnu"]
+[ext_resource type="AudioStream" uid="uid://cc2o65cpl8h8e" path="res://assets/audio/samples/instr2/aminor/3-d4.wav" id="14_2ek0h"]
+[ext_resource type="AudioStream" uid="uid://dphjv7t1k8svc" path="res://assets/audio/samples/instr2/aminor/4-e4.wav" id="15_n6gwr"]
+[ext_resource type="AudioStream" uid="uid://ciueodsoket2d" path="res://assets/audio/samples/instr2/aminor/5-f4.wav" id="16_27fpy"]
+[ext_resource type="AudioStream" uid="uid://bsd1wka11gj6c" path="res://assets/audio/samples/instr2/aminor/6-g#4.wav" id="17_v6ufr"]
+[ext_resource type="AudioStream" uid="uid://6mlcp1su24bb" path="res://assets/audio/samples/instr2/aminor/7-a5.wav" id="18_01sak"]
 
 [sub_resource type="Resource" id="Resource_uo2j7"]
 script = ExtResource("2_05igt")
@@ -59,7 +67,55 @@ tag = "7"
 stream = ExtResource("10_dbbjy")
 metadata/_custom_type_script = "uid://xwsen5j60ci3"
 
+[sub_resource type="Resource" id="Resource_ddqkm"]
+script = ExtResource("2_05igt")
+tag = "aminor_0"
+stream = ExtResource("11_148ix")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_o1lcf"]
+script = ExtResource("2_05igt")
+tag = "aminor_1"
+stream = ExtResource("12_dbbjy")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_rm3m4"]
+script = ExtResource("2_05igt")
+tag = "aminor_2"
+stream = ExtResource("13_wpgnu")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_yr06b"]
+script = ExtResource("2_05igt")
+tag = "aminor_3"
+stream = ExtResource("14_2ek0h")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_g3fmh"]
+script = ExtResource("2_05igt")
+tag = "aminor_4"
+stream = ExtResource("15_n6gwr")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_btxes"]
+script = ExtResource("2_05igt")
+tag = "aminor_5"
+stream = ExtResource("16_27fpy")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_k3f36"]
+script = ExtResource("2_05igt")
+tag = "aminor_6"
+stream = ExtResource("17_v6ufr")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
+[sub_resource type="Resource" id="Resource_0jycw"]
+script = ExtResource("2_05igt")
+tag = "aminor_7"
+stream = ExtResource("18_01sak")
+metadata/_custom_type_script = "uid://xwsen5j60ci3"
+
 [resource]
 script = ExtResource("1_mgsr4")
-sound_effects = Array[ExtResource("2_05igt")]([SubResource("Resource_uo2j7"), SubResource("Resource_s1a1d"), SubResource("Resource_ctamp"), SubResource("Resource_5r12w"), SubResource("Resource_fjfys"), SubResource("Resource_a3uvh"), SubResource("Resource_d8lxh"), SubResource("Resource_6rvxu")])
+sound_effects = Array[ExtResource("2_05igt")]([SubResource("Resource_uo2j7"), SubResource("Resource_s1a1d"), SubResource("Resource_ctamp"), SubResource("Resource_5r12w"), SubResource("Resource_fjfys"), SubResource("Resource_a3uvh"), SubResource("Resource_d8lxh"), SubResource("Resource_6rvxu"), SubResource("Resource_ddqkm"), SubResource("Resource_o1lcf"), SubResource("Resource_rm3m4"), SubResource("Resource_yr06b"), SubResource("Resource_g3fmh"), SubResource("Resource_btxes"), SubResource("Resource_k3f36"), SubResource("Resource_0jycw")])
 metadata/_custom_type_script = "uid://b0t3mmdcvowi7"

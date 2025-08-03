@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://t65qpqebw0rg" path="res://assets/audio/samples/instr1/instr1_audio_library.tres" id="9_qv4qn"]
 [ext_resource type="Script" uid="uid://hd1dahd1lpfr" path="res://scripts/classes/confetti_emitter.gd" id="10_dagly"]
 [ext_resource type="Resource" uid="uid://be4sk7totaj65" path="res://assets/audio/samples/instr2/instr2_audio_library.tres" id="10_vjcl8"]
-[ext_resource type="Resource" uid="uid://w1vaeb5vc4mo" path="res://assets/audio/samples/instr3/instr1_audio_library.tres" id="11_e03pu"]
+[ext_resource type="Resource" uid="uid://cokmlcqk11aeu" path="res://assets/audio/samples/instr3/instr3_audio_library.tres" id="14_ib56u"]
 [ext_resource type="PackedScene" uid="uid://duqnwl4lwb5fn" path="res://scenes/volume_slider.tscn" id="14_mvy5p"]
 [ext_resource type="PackedScene" uid="uid://b1r084b8sxtdm" path="res://scenes/crt_effect.tscn" id="17_qpt1g"]
 
@@ -187,6 +187,7 @@ text = "[A] (Replay goal pattern)
 [Z] (Toggle note)
 [X] (Toggle click track)
 [C] (Check goal pattern)
+[Q] (Swap Scale)
 [Enter] (Next Level, on Win Screen)
 [Esc] (Quit to Main Menu)"
 
@@ -210,7 +211,7 @@ audio_library = ExtResource("10_vjcl8")
 
 [node name="instr3_PolyphonicAudioPlayer" parent="Sequencer" instance=ExtResource("4_qpt1g")]
 position = Vector2(1250.36, 180.44)
-audio_library = ExtResource("11_e03pu")
+audio_library = ExtResource("14_ib56u")
 
 [node name="WinOrLoseLabel" type="Label" parent="."]
 anchors_preset = 8
