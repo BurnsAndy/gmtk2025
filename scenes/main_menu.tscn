@@ -138,6 +138,22 @@ offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="Label" type="Label" parent="MainMenuUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -141.0
+offset_right = 2048.0
+grow_vertical = 0
+theme = ExtResource("6_rtw2f")
+theme_override_font_sizes/font_size = 12
+text = "All code and assets were made specifically for and during the GMTK 2025 Game Jam by Andy Burns, except for:
+Font: Invasion 2000 (c) Jakob Fischer - www.pizzadude.dk
+Font: Positive System (c) WOODCUTTER - www.woodcutter.es
+Shader: Minimal CRT Shader - blitpxl - https://godotshaders.com/shader/minimal-crt-shader/"
+vertical_alignment = 2
+
 [node name="CrtEffect" parent="MainMenuUI" instance=ExtResource("20_8egab")]
 layout_mode = 1
 
