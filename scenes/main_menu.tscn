@@ -74,25 +74,41 @@ alignment = 1
 vertical = true
 
 [node name="Label" type="RichTextLabel" parent="MainMenuUI/BoxContainer"]
+custom_minimum_size = Vector2(0, 61.375)
 layout_mode = 2
 theme = ExtResource("6_rtw2f")
-text = "CR//KLS"
+bbcode_enabled = true
+text = "[shake rate=2.0 level=2 connected=1]CR//KLS[/shake]"
 fit_content = true
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/BoxContainer"]
+custom_minimum_size = Vector2(0, 31.16)
 layout_mode = 2
 bbcode_enabled = true
-text = "[i]a circular music sequencer puzzle game[/i]"
+text = "[wave amp=15.0 freq=3 connected=1][i]a circular music sequencer puzzle game[/i][/wave]"
 fit_content = true
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayAllLevelsButton" type="Button" parent="MainMenuUI/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("6_rtw2f")
-text = "Play All Levels"
+text = "                           "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenuUI/BoxContainer/PlayAllLevelsButton"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]Play All Levels[/pulse]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LevelSelectButton" type="Button" parent="MainMenuUI/BoxContainer"]
 layout_mode = 2

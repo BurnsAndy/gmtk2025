@@ -10,7 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Sequencer"
+config/name="CR//KLS"
+config/description="A circular music sequencer puzzle game."
+config/version="0.0.1"
 run/main_scene="uid://cc5a2txvcsmjt"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -18,6 +20,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 ScoreManager="*res://scripts/classes/managers/score_manager.gd"
+
+[display]
+
+window/size/resizable=false
 
 [rendering]
 
