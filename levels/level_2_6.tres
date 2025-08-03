@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://fo5md1sgj0u2"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_4qv7t"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_g8s5m"]
+
+[sub_resource type="Resource" id="Resource_gw5y6"]
+script = ExtResource("2_g8s5m")
+track_radius = 200
+step_radius = 20
+num_steps = 8
+goal_pattern = Array[int]([2, 0, 2, 0, 2, 4, -1, 0])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_svtp6"]
+script = ExtResource("2_g8s5m")
+track_radius = 150
+step_radius = 15
+num_steps = 8
+goal_pattern = Array[int]([2, 2, 2, 2, 0, 4, -1, 0])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_4qv7t")
+level_name = "Level 2-6"
+description = "It's-not-a-me."
+bpm = 180
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_g8s5m")]([SubResource("Resource_gw5y6"), SubResource("Resource_svtp6")])
+cubes = false
+minor = false
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

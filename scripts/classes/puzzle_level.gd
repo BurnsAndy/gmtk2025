@@ -10,6 +10,7 @@ class_name PuzzleLevel
 @export var best_score: int = 0
 @export var track_settings: Array[SequencerTrackSettings] = []
 @export var cubes: bool
+@export var minor: bool = false
 
 func load_best_score():
 	best_score = ScoreManager.get_best_score(level_name)

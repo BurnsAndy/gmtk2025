@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://bj4ikhdkiqcna"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_8dc1c"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_tfdg8"]
+
+[sub_resource type="Resource" id="Resource_a8gd2"]
+script = ExtResource("2_tfdg8")
+track_radius = 200
+step_radius = 10
+num_steps = 16
+goal_pattern = Array[int]([0, 1, 2, 4, 4, 5, 4, 2, 0, 1, 2, 2, 1, 0, 1, -1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_hstxw"]
+script = ExtResource("2_tfdg8")
+track_radius = 150
+step_radius = 10
+num_steps = 8
+goal_pattern = Array[int]([0, 0, 4, 4, 0, 0, 4, 0])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_8dc1c")
+level_name = "Level 2-7"
+description = "Oh."
+bpm = 160
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_tfdg8")]([SubResource("Resource_a8gd2"), SubResource("Resource_hstxw")])
+cubes = false
+minor = false
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

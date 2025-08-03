@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://baq6lpxn2soy0"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_j0n0m"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_mn2en"]
+
+[sub_resource type="Resource" id="Resource_7b55j"]
+script = ExtResource("2_mn2en")
+track_radius = 200
+step_radius = 20
+num_steps = 16
+goal_pattern = Array[int]([-1, -1, 5, 5, 5, 5, 5, 5, -1, 5, 5, 5, 5, 5, 6, -1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_5pajh"]
+script = ExtResource("2_mn2en")
+track_radius = 150
+step_radius = 15
+num_steps = 16
+goal_pattern = Array[int]([-1, 0, 5, 0, 4, 5, 4, 0, -1, 1, 5, 1, 5, 6, 5, 1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_j0n0m")
+level_name = "Level 2-8"
+description = "Hardly bright."
+bpm = 220
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_mn2en")]([SubResource("Resource_7b55j"), SubResource("Resource_5pajh")])
+cubes = false
+minor = false
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"
