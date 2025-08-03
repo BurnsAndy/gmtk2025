@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://dm3ug103awsr2"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_1fbsb"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_3tvhu"]
+
+[sub_resource type="Resource" id="Resource_rcqid"]
+script = ExtResource("2_3tvhu")
+track_radius = 200
+step_radius = 20
+num_steps = 16
+goal_pattern = Array[int]([0, 0, 5, -1, 2, 2, 7, -1, 0, 0, 5, -1, 4, 3, 5, 7])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_1ajci"]
+script = ExtResource("2_3tvhu")
+track_radius = 150
+step_radius = 10
+num_steps = 32
+goal_pattern = Array[int]([0, 5, 0, 5, 0, 5, 0, 5, 2, 7, 2, 7, 2, 7, 2, 7, 0, 5, 0, 5, 0, 5, 0, 5, 3, 5, 3, 5, 3, 5, 3, 5])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_1fbsb")
+level_name = "Level 2-4"
+description = "Bottom-heavy."
+bpm = 133
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_3tvhu")]([SubResource("Resource_rcqid"), SubResource("Resource_1ajci")])
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

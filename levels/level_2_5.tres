@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://e1t8levjqjq0"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_bns85"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_ugykg"]
+
+[sub_resource type="Resource" id="Resource_7b55j"]
+script = ExtResource("2_ugykg")
+track_radius = 200
+step_radius = 20
+num_steps = 4
+goal_pattern = Array[int]([4, 7, 3, 6])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_5pajh"]
+script = ExtResource("2_ugykg")
+track_radius = 150
+step_radius = 15
+num_steps = 8
+goal_pattern = Array[int]([1, 2, 3, 5, 4, 3, 0, -1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_bns85")
+level_name = "Level 2-5"
+description = "Norway?"
+bpm = 22
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_ugykg")]([SubResource("Resource_7b55j"), SubResource("Resource_5pajh")])
+cubes = true
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

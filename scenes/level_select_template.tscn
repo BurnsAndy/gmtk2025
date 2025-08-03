@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://gawu21oqc8m0" path="res://scripts/level_select_template.gd" id="1_wbxww"]
 
 [node name="LevelSelectTemplate" type="Panel"]
-custom_minimum_size = Vector2(17.82, 0)
+custom_minimum_size = Vector2(214, 135)
 offset_right = 214.0
 offset_bottom = 135.0
 size_flags_horizontal = 3

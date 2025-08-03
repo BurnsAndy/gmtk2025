@@ -20,6 +20,7 @@ func _ready() -> void:
 	sequencer.pattern_complete.connect(puzzle_mode.stop_goal_pattern)
 	sequencer.check_requested.connect(_on_check_requested)
 	sequencer.play_goal_requested.connect(puzzle_mode.play_goal_pattern)
+	sequencer.play_goal_cancel_requested.connect(puzzle_mode.stop_goal_pattern)
 	
 	change_scene("next_level")
 

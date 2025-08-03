@@ -9,6 +9,7 @@ class_name PuzzleLevel
 @export var score_penalty: int = 100    # Points deducted per check
 @export var best_score: int = 0
 @export var track_settings: Array[SequencerTrackSettings] = []
+@export var cubes: bool
 
 func load_best_score():
 	best_score = ScoreManager.get_best_score(level_name)

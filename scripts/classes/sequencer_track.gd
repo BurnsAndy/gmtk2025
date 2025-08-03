@@ -34,4 +34,5 @@ func update_track_settings(settings: SequencerTrackSettings):
 	step_radius = track_settings.step_radius
 	num_steps = track_settings.num_steps
 	angle_per_step = 360.0 / num_steps
+	wrong_notes.resize(num_steps)
 	

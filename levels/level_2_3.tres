@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PuzzleLevel" load_steps=5 format=3 uid="uid://bxf0kn18ym8ko"]
+
+[ext_resource type="Script" uid="uid://dlvmfqij2g0ha" path="res://scripts/classes/puzzle_level.gd" id="1_1ahac"]
+[ext_resource type="Script" uid="uid://uyds5miy56i0" path="res://scripts/classes/sequencer_track_settings.gd" id="2_3ph2i"]
+
+[sub_resource type="Resource" id="Resource_rcqid"]
+script = ExtResource("2_3ph2i")
+track_radius = 200
+step_radius = 15
+num_steps = 21
+goal_pattern = Array[int]([0, 1, 3, 0, 1, 3, 2, 3, 5, 4, 5, 7, 2, 3, 5, 2, 3, 5, 0, 1, 3])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[sub_resource type="Resource" id="Resource_1ajci"]
+script = ExtResource("2_3ph2i")
+track_radius = 150
+step_radius = 13
+num_steps = 7
+goal_pattern = Array[int]([0, 0, 2, 4, 2, 2, 1])
+metadata/_custom_type_script = "uid://uyds5miy56i0"
+
+[resource]
+script = ExtResource("1_1ahac")
+level_name = "Level 2-3"
+description = "That's odd."
+bpm = 190
+max_score = 1000
+score_penalty = 100
+best_score = 0
+track_settings = Array[ExtResource("2_3ph2i")]([SubResource("Resource_rcqid"), SubResource("Resource_1ajci")])
+metadata/_custom_type_script = "uid://dlvmfqij2g0ha"

@@ -13,16 +13,20 @@ var steps_per_second: float = 0
 var playhead_angle: float   = 0.0
 var playing: bool     = true
 var notes_hidden: bool = false
-var last_step: int    = -1
 var controls_locked: bool = true
-#@onready var audio_manager:AudioManager = $AudioManager
+var click_enabled = true
+var current_step: int = 0
+var cubes:bool = false
 @onready var instr_1_polyphonic_audio_player: AudioStreamPlayer2D = $instr1_PolyphonicAudioPlayer
 @onready var instr_2_polyphonic_audio_player: AudioStreamPlayer2D = $instr2_PolyphonicAudioPlayer
+@onready var instr_3_polyphonic_audio_player: AudioStreamPlayer2D = $instr3_PolyphonicAudioPlayer
+@onready var click_polyphonic_audio_player: AudioStreamPlayer2D = $click_PolyphonicAudioPlayer
 
 
 signal pattern_complete
 signal check_requested
 signal play_goal_requested
+signal play_goal_cancel_requested
 # Audio variables
 @onready var audio_player = AudioStreamPlayer.new()
 
@@ -46,7 +50,7 @@ func _get_note_color(track:SequencerTrack, note_index: int) -> Color:
 	if notes_hidden:
 		return Color.LIGHT_GRAY
 	elif track.notes[note_index] >= 0:
-		if note_index == last_step && playing:
+		if note_index == track.last_step && playing:
 			return Color.WHITE
 		# Get the scale degree (0-7 for an 8-note scale)
 		var scale_degree: int = track.notes[note_index] % 8
@@ -58,10 +62,10 @@ func setup_tracks(level: PuzzleLevel):
 	tracks.resize(level.track_settings.size())
 	for i in level.track_settings.size():
 		var settings = level.track_settings[i]
-		print(level.track_settings.size())
-		print(level.track_settings[i].goal_pattern.size())
 		tracks[i] = SequencerTrack.new(level.track_settings[i])
 	tracks[0].active = true
+	bpm = level.bpm
+	cubes = level.cubes
 	steps_per_second = (bpm / 60)# * tracks[0].num_steps
 	
 func _ready() -> void:
@@ -73,30 +77,45 @@ func _ready() -> void:
 
 func _process(delta):
 	if playing:
-		# Update playhead (changed negative to positive for clockwise rotation)
 		playhead_angle += steps_per_second * tracks[0].angle_per_step * delta
 		playhead_angle = fmod(playhead_angle, 360.0)
-		# Check if we hit a new step
 		for i in range(tracks.size()):
-			var current_step: int = int(playhead_angle / tracks[i].angle_per_step)
+			current_step = int(playhead_angle / tracks[i].angle_per_step)
 			if current_step != tracks[i].last_step:
 				if (current_step == 0 && tracks[i].last_step == tracks[i].num_steps - 1):
 					pattern_complete.emit()
 				if tracks[i].notes[current_step] != -1:
 					play_sample(i, tracks[i].notes[current_step])
+				if i == 0 && click_enabled:
+					play_click()
 				tracks[i].last_step = current_step
 		
 	queue_redraw()
 
 func play_sample(track_index:int, note_index:int):
-	prints("playing - track: ", track_index, ", sample: ", note_index)
-	var sample_name = str(track_index) + "_" + str(note_index)
+	#currently each instrument has 8 notes on a dmajor scale labeled 0-8
+	#might want to prefix those samples in their library with "dmajor_" if you want other scales
 	match track_index:
 		0:
-			instr_1_polyphonic_audio_player.play_sound_effect_from_library(sample_name)
+			instr_3_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
 		1:
-			instr_2_polyphonic_audio_player.play_sound_effect_from_library(sample_name)
+			instr_2_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
+		2:
+			instr_1_polyphonic_audio_player.play_sound_effect_from_library(str(note_index))
 
+func play_click():
+	var sample = "click_1"
+	var max_steps = tracks[0].num_steps
+	var beats_per_measure = 0
+	
+	for i in range(max_steps):
+		if i > 0 && max_steps % i == 0:
+			beats_per_measure = i
+	
+	if beats_per_measure != 0 && current_step % beats_per_measure == 0:
+		sample = "click_2" 
+	
+	click_polyphonic_audio_player.play_sound_effect_from_library(sample)
 
 func draw_wrong_note_indicator(pos):
 	var indicator_length = 25
@@ -119,7 +138,11 @@ func draw_track(track:SequencerTrack):
 
 		var color: Color = Color.DARK_GRAY
 		color = _get_note_color(track, i)
-		draw_circle(pos, track.step_radius, color)
+		if cubes:
+			draw_rect(Rect2(Vector2(pos.x - track.step_radius, pos.y - track.step_radius), Vector2(track.step_radius*2, track.step_radius*2)), color)
+		else:
+			draw_circle(pos, track.step_radius, color)
+		
 		if track.wrong_notes[i]:
 			draw_wrong_note_indicator(pos)
 		
@@ -197,8 +220,8 @@ func set_note_active():
 
 
 func _unhandled_input(event):
-	if !controls_locked && event is InputEventKey:
-		if event.pressed:
+	if event is InputEventKey:
+		if event.pressed && (!controls_locked || event.keycode == KEY_A):
 			match event.keycode:
 				KEY_LEFT:
 					cursor_move(-1)
@@ -220,9 +243,14 @@ func _unhandled_input(event):
 				KEY_C:
 					stop()
 				KEY_A:
-					play_goal_requested.emit()
+					if !controls_locked:
+						play_goal_requested.emit()
+					else:
+						play_goal_cancel_requested.emit()
 				KEY_S:
 					check_requested.emit()
+				KEY_D:
+					click_enabled = !click_enabled
 
 
 func get_current_pattern():
@@ -247,7 +275,8 @@ func set_pattern(new_pattern):
 
 func stop():
 	playing = false
-	last_step = -1
+	for i in range(tracks.size()):
+		tracks[i].last_step = -1
 	playhead_angle = 0
 
 
@@ -268,18 +297,19 @@ func show_notes():
 
 
 func set_wrong_notes(new_wrong_notes) -> void:
-		for i in range(new_wrong_notes.size()):
-			tracks[i].wrong_notes.resize(new_wrong_notes[i].size())
-			for j in range(new_wrong_notes[i].size()):
-				tracks[i].wrong_notes[j] = new_wrong_notes[i][j]
+	for i in range(new_wrong_notes.size()):
+		tracks[i].wrong_notes.resize(new_wrong_notes[i].size())
+		for j in range(new_wrong_notes[i].size()):
+			tracks[i].wrong_notes[j] = new_wrong_notes[i][j]
+	print("debug")
 
 
 func clear_wrong_notes() -> void:
 	var cleared_wrong_notes: Array[bool] = []
 	for i in range(tracks.size()):
-		tracks[i].notes
-		cleared_wrong_notes.resize(tracks[i].num_steps)
-		tracks[i].wrong_notes = cleared_wrong_notes
+		tracks[i].wrong_notes.clear()
+		tracks[i].wrong_notes.resize(tracks[i].num_steps)
+	print("debug")
 
 
 func lock_controls(locked: bool):
